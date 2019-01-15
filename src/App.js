@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import MovieLikes from './MovieLikes.js';
 
 /*
 Display a list of movies where each movie contains a list of users that favorited it.
@@ -99,16 +99,17 @@ const movies = {
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">ReactND - Coding Practice</h1>
-        </header>
-        <h2>How Popular is Your Favorite Movie?</h2>
-      </div>
-    );
-  }
+      return (
+        // Could not use Object.keys() inside JSX, so created outermost element using createElement()
+        React.createElement("div", {className:"App"}, Object.keys(movies).map(
+          key => <MovieLikes movie={movies[key]}
+                    users={
+                    profiles.filter(profile => profile.favoriteMovieID === key).map(profile2 => users[profile2.userID])
+                }
+                    />
+				))
+      )
+	}
 }
 
 export default App;
